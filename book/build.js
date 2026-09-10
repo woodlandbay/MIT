@@ -30,9 +30,13 @@ md = md.replace(/\$\$([\s\S]+?)\$\$/g, (m, tex) =>
 md = md.replace(/\$([^$\n]+?)\$/g, (m, tex) =>
   stash(katex.renderToString(tex, { displayMode: false, throwOnError: false })));
 
+// Green blocks: lines ":::added" and ":::" delimit second edition additions.
+md = md.replace(/^:::added\s*$/gm, '\n@@ADDOPEN@@\n').replace(/^:::\s*$/gm, '\n@@ADDCLOSE@@\n');
+
 marked.setOptions({ gfm: true, breaks: false });
 let body = marked.parse(md);
 body = body.replace(/@@MATH(\d+)@@/g, (m, i) => slots[Number(i)]);
+body = body.replace(/<p>@@ADDOPEN@@<\/p>/g, '<div class="added">').replace(/<p>@@ADDCLOSE@@<\/p>/g, '</div>');
 
 // Table of contents from h1 and h2
 const toc = [];
@@ -87,6 +91,8 @@ const css = `
   .added, .added * { color: #0a7a2f !important; }
   ins.added { text-decoration: none; }
   div.added { border-left: 3px solid #0a7a2f; padding-left: .8rem; margin: .8rem 0; }
+  div.added th { background: #eef7f0; }
+  .legend { font-size: .9rem; color: var(--muted); margin: -1rem 0 1.5rem 0; }
   @media print {
     body { padding: 0; max-width: none; font-size: 11pt; }
     nav.toc { page-break-after: always; }

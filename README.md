@@ -4,12 +4,19 @@ Private study companion for the MIT Professional Education program
 **No Code AI and Machine Learning: Building Data Science Solutions**
 (delivered with Great Learning, cohort January 2026 B).
 
+Second edition (September 2026): merges the learner's Google Drive archive (official schedule, brochure,
+lecture handouts, mentor decks, personal notes, transcripts and the three project submissions).
+Everything added or corrected in the second edition is rendered in green.
+
 | File | Purpose |
 |---|---|
 | `book/NoCodeAI_ML_Program_Book.md` | The book, Markdown source with LaTeX math |
 | `book/NoCodeAI_ML_Program_Book.html` | Self contained HTML rendering (math rendered with KaTeX, fonts embedded) |
 | `book/NoCodeAI_ML_Program_Book.pdf` | Printable PDF, US Letter |
 | `book/build.js` | Rebuilds the HTML and PDF from the Markdown |
+
+In the Markdown, a block between a line `:::added` and a line `:::` is rendered as a green
+second edition block; inline additions use `<span class="added">...</span>`.
 
 ## Rebuild
 
@@ -29,4 +36,4 @@ Playwright needs a Chromium build; `npx playwright install chromium` fetches one
 5. Projects and portfolio
 6. Formula sheet and glossary
 7. Self test questions and a thirty day revision plan
-8. Appendices: sources, reading list
+8. Appendices: sources, reading list, and the discrepancies between the learner's own files
