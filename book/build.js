@@ -84,6 +84,9 @@ const css = `
   nav.toc li.lvl2 { padding-left: 1.2rem; font-weight: normal; font-size: .95rem; }
   nav.toc a { color: var(--ink); text-decoration: none; }
   strong { color: #000; }
+  .added, .added * { color: #0a7a2f !important; }
+  ins.added { text-decoration: none; }
+  div.added { border-left: 3px solid #0a7a2f; padding-left: .8rem; margin: .8rem 0; }
   @media print {
     body { padding: 0; max-width: none; font-size: 11pt; }
     nav.toc { page-break-after: always; }
