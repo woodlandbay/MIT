@@ -2242,6 +2242,36 @@ so each token forms a weighted average of the values of all previous tokens with
 <p><strong>Keep.</strong> A prompt is a specification. State role, goal, inputs, constraints, and output format, give one or two examples, and ask the model to show its reasoning when the task is multi step. Verify every fact the model states; fluency is not evidence.</p>
 <div class="added">
 <p><strong>What the MIT lectures actually said.</strong> Six videos and five content pages by Munther Dahleh: generative models are not new (a fitted density is a generative model; a random forest generates labels; an AR(p) process generates the future; matrix completion generates missing ratings; AlphaFold generates protein structures); what is new is generation from sparse data; autoencoders and diffusion models (forward noising as a dynamical system whose inverse is learned as a model of the noise); LLMs as next word predictors that were never optimized for factual truth; hallucination illustrated with the professor&#39;s own name (a model invented a &quot;Prof. Yaser S. (Yazeed) Dahleh&quot; and a Davidson College basketball player); RLHF and the question &quot;whose values&quot;; data rights (the Google, OpenAI and New York Times disputes), safety, accountability; tuning versus training (soft prompts trained with frozen weights, hours to days, versus pretraining on trillions of tokens for weeks); agentic AI defined by goals, autonomy, perception, planning and adaptation with the self driving car as the reference system; and the ACT.org college assistant demo. The prompt engineering pages taught system, user and assistant messages; zero shot, few shot and chain of thought; temperature 0 to 0.3 for factual work and 0.7 to 1.0 for creative work; max tokens, top p and frequency penalty; the draft, run, observe, refine loop; JSON output constraints; guardrails such as &quot;if unsure, respond I don&#39;t know&quot;; and an evaluation checklist (consistency, relevance, structure, factuality, clarity, efficiency) run on 10 to 15 test cases including edge cases.</p>
+<p><strong>The three prompting techniques, as the course defined them</strong> (content page 1.5.4, &quot;Core Prompting Techniques&quot;, from your Olympus export of April 19).</p>
+<table>
+<thead>
+<tr>
+<th>Technique</th>
+<th>What you do</th>
+<th>Strength</th>
+<th>Weakness</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Zero shot</td>
+<td>Give the instruction with no example: &quot;Classify the tone of this review as positive or negative.&quot;</td>
+<td>Fast; no examples to write; works when the task is common and the model already knows the format</td>
+<td>Inconsistent output format; the model may add text you did not ask for</td>
+</tr>
+<tr>
+<td>Few shot</td>
+<td>Give one to three example pairs before the real input: user &quot;Love it!&quot; assistant &quot;Positive&quot;, then the review to classify</td>
+<td>Consistent structure; the examples define the labels and the format better than any description</td>
+<td>Costs tokens on every call; poor examples give poor output</td>
+</tr>
+<tr>
+<td>Chain of thought</td>
+<td>Ask the model to reason before answering: &quot;If a train leaves at 9 AM and arrives at 1 PM, how long was the journey? Let&#39;s think step by step.&quot; (answer: 4 hours)</td>
+<td>Better on multi step tasks, arithmetic and logic</td>
+<td>Flawed early reasoning still sounds confident; the model does not notice its own mistake</td>
+</tr>
+</tbody></table>
+<p>The page&#39;s rule of thumb: start zero shot, add examples when the format drifts, add chain of thought when the task has steps. The surrounding pages (1.5.3 and 1.5.5) tie this to the parameters and the loop: lower the temperature to 0 to 0.3 and add constraints when the answer is plausible but wrong, raise the frequency penalty when it repeats itself, raise max tokens when it is cut off; then draft, run on 10 to 15 cases including edge cases, score, fix one issue at a time, rerun, and keep a version of every prompt. In your own work the three techniques map directly: the Pixtral yoga test (Module 8) was zero shot from one sentence; the hotel review and medical summary practice cases (Module 11) were few shot with two to four pairs; the MediSure judge (Module 11) asked for reasoning per dimension before its verdict, which is chain of thought in a rubric.</p>
 <p><strong>Mentored session (April 18): an agentic web search assistant in n8n.</strong> The case was MarketPulse Intelligence. You built, in the Great Learning n8n lab, a main workflow (Chat Trigger, AI Agent, OpenAI Chat Model, Simple Memory with a window of about 10 messages) and a &quot;Search web&quot; sub workflow (Execute Sub workflow trigger with inputs SearchQuery and MaxSitesToSearch, a Wait node of 5 seconds because DuckDuckGo fails when called too fast, the DuckDuckGo community node with safe search off, an Edit Fields node keeping only description and url, and an Aggregate node returning two arrays of 10), published it, attached it to the agent as &quot;Call n8n Workflow as Tool&quot;, wrote the research assistant system message (always search before answering, read all snippets, synthesize across sources, cite each page with its URL, never invent, stay neutral, the current date injected as an expression), and added an evaluation node (OpenAI &quot;Message a Model&quot; with GPT 4.1 Mini) that reproduces the answer and grades Relevance, Grounding, Completeness and Clarity as Pass or Fail. This session is the template that you reused, with your own choices, in the MediSure project.</p>
 <p><strong>Practice exercise: Browbake.</strong> A bakery needs promotional content. Task 1, a poster in Google Gemini with a simple prompt and then an improved one (a system message casting the model as a food brand designer, an Instagram composition, brand name in the top third, tagline &quot;Pure Bliss in Every Bite&quot;, a caramel, brown and cream palette, a 120 pixel area for contact icons). Task 2, an eight second video in Adobe Firefly (Veo 3.1 model) from a storyboard prompt. Task 3, a voiceover in ElevenLabs (&quot;Experience pure indulgence with every bite...&quot;). Task 4, merge in Qooly. Your outputs of April 15: three ElevenLabs takes (two with the Charlotte voice, one with Jeanne Mance), the Firefly video, and merged videos for the brownie brief plus your own chocolate cake and carrot cake variants. You then wrote a single page web application, &quot;Browbake AI Video Creator&quot;, with a five step progress bar, a campaign form that fills the brand, products, tagline, call to action, palette, contact and script into every prompt, simple and improved prompt tabs with copy buttons, direct links and recommended settings for each tool (Firefly at 720p, 16:9, 24 fps, 8 seconds, audio off; ElevenLabs Charlotte on Eleven Multilingual v2, clarity high), checklists, and local storage of progress. One tip mentions &quot;Click Download (Télécharger)&quot;, a trace of your French language Firefly interface.</p>
 <p><strong>Your notes.</strong> Your April 19 export of the module pages includes the transformer supplement and the session plan; Dahleh&#39;s own deck is in the folder.</p>

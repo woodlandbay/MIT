@@ -121,7 +121,9 @@ console.log('HTML written', outHtml, (html.length / 1024).toFixed(0) + ' KB');
 (async () => {
   let pw;
   try { pw = require('playwright'); } catch (e) { console.log('playwright not found, skipping PDF'); return; }
-  const browser = await pw.chromium.launch();
+  const fs2 = require('fs');
+  const exe = process.env.CHROMIUM_PATH || ['/opt/pw-browsers/chromium', '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'].find(p => fs2.existsSync(p) && fs2.statSync(p).isFile());
+  const browser = await pw.chromium.launch(exe ? { executablePath: exe } : {});
   const page = await browser.newPage();
   await page.goto('file://' + outHtml, { waitUntil: 'load' });
   await page.pdf({
